@@ -24,7 +24,9 @@ public class Chatbot
 	 */
 	public Chatbot(String userName)
 	{
-
+		memesList = new ArrayList<String>();
+		
+		content = new String("Content");
 	}
 
 	private void buildMemesList()
@@ -106,7 +108,7 @@ public class Chatbot
 	 */
 	public String getContent()
 	{
-		return null;
+		return content;
 	}
 
 	/**
@@ -116,7 +118,7 @@ public class Chatbot
 	 */
 	public ArrayList<String> getMemesList()
 	{
-		return null;
+		return memesList;
 	}
 
 	/**
@@ -137,6 +139,6 @@ public class Chatbot
 	 */
 	public void setContent(String content)
 	{
-
+		content = new String ("New content");
 	}
 }
