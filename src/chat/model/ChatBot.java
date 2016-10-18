@@ -20,13 +20,13 @@ public class Chatbot
 	 * Creates an instance of the Chatbot with the supplied username.
 	 * 
 	 * @param userName
-	 *            The username for the chatbot.
+	 *The username for the chatbot.
 	 */
 	public Chatbot(String userName)
 	{
 		memesList = new ArrayList<String>();
 		
-		content = new String("Content");
+		content = ("Content");
 	}
 
 	private void buildMemesList()
@@ -48,7 +48,14 @@ public class Chatbot
 	 */
 	public boolean lengthChecker(String currentInput)
 	{
-		return false;
+		boolean hasLength = false;
+		
+		if(currentInput != null && !currentInput.equals(""))
+		{
+			hasLength = true;
+		}
+		
+		return hasLength;
 	}
 
 	/**
@@ -139,6 +146,6 @@ public class Chatbot
 	 */
 	public void setContent(String content)
 	{
-		content = new String ("New content");
+		content = ("New content");
 	}
 }
