@@ -25,19 +25,22 @@ public class Chatbot
 	public Chatbot(String userName)
 	{
 		memesList = new ArrayList<String>();
+		politicalTopicList = new ArrayList<String>();
 		
 		content = ("Content");
+		this.userName = userName;
 		
 	}
 
 	private void buildMemesList()
 	{
-
+		memesList.add("John Cena");
+		memesList.add("Harambe");
 	}
 
 	private void buildPoliticalTopicsList()
 	{
-
+		
 	}
 
 	/**
@@ -136,7 +139,7 @@ public class Chatbot
 	 */
 	public ArrayList<String> getPoliticalTopicList()
 	{
-		return null;
+		return politicalTopicList;
 	}
 
 	/**
@@ -149,5 +152,29 @@ public class Chatbot
 	{
 		this.content = content;
 		
+	}
+
+	public boolean twitterChecker(String string)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean quitChecker(String string)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean keyboardMashChecker(String string)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean inputHTMLChecker(String string)
+	{
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
