@@ -146,6 +146,7 @@ public class Chatbot
 	 */
 	public void setContent(String content)
 	{
-		content = ("New content");
+		this.content = content;
+		
 	}
 }
