@@ -15,6 +15,7 @@ public class Chatbot
 	private ArrayList<String> politicalTopicList;
 	private String userName;
 	private String content;
+	private ArrayList<String> mashList;
 
 	/**
 	 * Creates an instance of the Chatbot with the supplied username.
@@ -26,23 +27,71 @@ public class Chatbot
 	{
 		memesList = new ArrayList<String>();
 		politicalTopicList = new ArrayList<String>();
+		mashList = new ArrayList<String>();
 		
 		content = ("Content");
 		this.userName = userName;
-		
+		buildMemesList();
+		buildPoliticalTopicsList();
+		buildMashList();
 	}
+	
+	
 
 	private void buildMemesList()
 	{
-		memesList.add("John Cena");
-		memesList.add("Harambe");
+		memesList.add("john cena");
+		memesList.add("harambe");
+		memesList.add("doge");
+		memesList.add("cute animals");
+		memesList.add("cute animals");
+		memesList.add("grumpy cat");
+		memesList.add("dat boi");
+		memesList.add("willy wonka");
+		memesList.add("pepe");
+		memesList.add("trump's hair");
+		memesList.add("tacos");
+		memesList.add("geran");
+		memesList.add("meme hole");
+		memesList.add("the destroyer of salt");
+		memesList.add("lag");
+		memesList.add("godzilla");
+		memesList.add("nooo");
+		memesList.add("fruit snacks");
+		
 	}
 
 	private void buildPoliticalTopicsList()
 	{
-		
+		politicalTopicList.add("Democrat");
+		politicalTopicList.add("Republican");
+		politicalTopicList.add("11/8/16");
+		politicalTopicList.add("liberal");
+		politicalTopicList.add("conservative");
+		politicalTopicList.add("Clinton");
+		politicalTopicList.add("Trump");
+		politicalTopicList.add("Kaine");
+		politicalTopicList.add("Pence");
+		politicalTopicList.add("Stein");
+		politicalTopicList.add("Johnson");
+		politicalTopicList.add("election");
+		politicalTopicList.add("gun control");
+		politicalTopicList.add("debates");
+		politicalTopicList.add("debt");
+		politicalTopicList.add("taxes");
+		politicalTopicList.add("emails");
+		politicalTopicList.add("doomed");
+		politicalTopicList.add("Hillary");
 	}
-
+	
+	private void buildMashList()
+	{
+		mashList.add("sdf");
+		mashList.add("dfg");
+		mashList.add("cvb");
+		mashList.add(",./");
+	}
+	
 	/**
 	 * Checks the length of the supplied string. Returns false if the supplied
 	 * String is empty or null, otherwise returns true.
@@ -72,7 +121,12 @@ public class Chatbot
 	 */
 	public boolean contentChecker(String currentInput)
 	{
-		return false;
+		boolean hasContent = false;
+		if(currentInput.contains(content))
+		{
+			hasContent = true;
+		}
+		return hasContent;
 	}
 
 	/**
@@ -86,6 +140,13 @@ public class Chatbot
 	 */
 	public boolean politicalTopicChecker(String currentInput)
 	{
+		for(int pos = 0; pos < politicalTopicList.size(); pos++)
+		{
+			if(currentInput.equals (politicalTopicList.get(pos)))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -99,7 +160,16 @@ public class Chatbot
 	 */
 	public boolean memeChecker(String currentInput)
 	{
+		for(int pos = 0; pos < memesList.size(); pos++)
+		{
+			if(currentInput.equalsIgnoreCase (memesList.get(pos)))
+			{
+				return true;
+			}
+			
+		}
 		return false;
+		
 	}
 
 	/**
@@ -141,7 +211,7 @@ public class Chatbot
 	{
 		return politicalTopicList;
 	}
-
+	
 	/**
 	 * Updates the content area for this Chatbot instance.
 	 * 
@@ -162,13 +232,22 @@ public class Chatbot
 
 	public boolean quitChecker(String string)
 	{
-		// TODO Auto-generated method stub
+		if (string.equalsIgnoreCase("quit"))
+		{
+			return true;
+		}
 		return false;
 	}
 
 	public boolean keyboardMashChecker(String string)
 	{
-		// TODO Auto-generated method stub
+		for(int pos = 0; pos < mashList.size(); pos++)
+		{
+			if(string.contains(mashList.get(pos)))
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 
