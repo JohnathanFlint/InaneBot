@@ -52,4 +52,15 @@ public String collectPictureResponse(String question, String path)
 		return userInput;
 	}
 
+public void displayPictureMessage(String message, String path)
+
+{
+	if(!path.equals(null))
+	{
+		chatIcon = new ImageIcon(getClass().getResource(path));
+	}
+	
+	JOptionPane.showMessageDialog(null, message, windowMessage, JOptionPane.INFORMATION_MESSAGE, chatIcon);		
+}
+
 }
