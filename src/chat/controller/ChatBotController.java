@@ -16,6 +16,7 @@ public class ChatbotController
 	
 	public void start()
 	{
+		String pResponse = display.collectPictureResponse("What do you want to talk about!?!", null);
 		String response = display.collectResponse("What do you want to talk about!?!");
 		
 		while(inaneBot.lengthChecker(response))

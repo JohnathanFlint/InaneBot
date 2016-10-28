@@ -6,18 +6,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import chat.controller.ChatController;
+import chat.controller.ChatbotController;
 import chat.model.Chatbot;
 import chat.view.ChatFrame;
 
 public class ChatControllerTest
 {
-	private ChatController testController;
+	private ChatbotController testController;
 
 	@Before
 	public void setUp() throws Exception
 	{
-		testController = new ChatController();
+		testController = new ChatbotController();
 	}
 
 	@After
