@@ -21,22 +21,20 @@ public class Chatbot
 	 * Creates an instance of the Chatbot with the supplied username.
 	 * 
 	 * @param userName
-	 *The username for the chatbot.
+	 *            The username for the chatbot.
 	 */
 	public Chatbot(String userName)
 	{
 		memesList = new ArrayList<String>();
 		politicalTopicList = new ArrayList<String>();
 		mashList = new ArrayList<String>();
-		
+
 		content = ("Content");
 		this.userName = userName;
 		buildMemesList();
 		buildPoliticalTopicsList();
 		buildMashList();
 	}
-	
-	
 
 	private void buildMemesList()
 	{
@@ -58,7 +56,7 @@ public class Chatbot
 		memesList.add("godzilla");
 		memesList.add("nooo");
 		memesList.add("fruit snacks");
-		
+
 	}
 
 	private void buildPoliticalTopicsList()
@@ -83,7 +81,7 @@ public class Chatbot
 		politicalTopicList.add("doomed");
 		politicalTopicList.add("Hillary");
 	}
-	
+
 	private void buildMashList()
 	{
 		mashList.add("sdf");
@@ -91,7 +89,7 @@ public class Chatbot
 		mashList.add("cvb");
 		mashList.add(",./");
 	}
-	
+
 	/**
 	 * Checks the length of the supplied string. Returns false if the supplied
 	 * String is empty or null, otherwise returns true.
@@ -102,12 +100,12 @@ public class Chatbot
 	public boolean lengthChecker(String currentInput)
 	{
 		boolean hasLength = false;
-		
-		if(currentInput != null && !currentInput.equals(""))
+
+		if (currentInput != null && !currentInput.equals(""))
 		{
 			hasLength = true;
 		}
-		
+
 		return hasLength;
 	}
 
@@ -123,8 +121,8 @@ public class Chatbot
 	{
 		boolean hasContent = false;
 		String tempInput = currentInput.toLowerCase();
-		
-		if(tempInput.toLowerCase().contains(content.toLowerCase()))
+
+		if (tempInput.toLowerCase().contains(content.toLowerCase()))
 		{
 			hasContent = true;
 		}
@@ -142,9 +140,9 @@ public class Chatbot
 	 */
 	public boolean politicalTopicChecker(String currentInput)
 	{
-		for(int pos = 0; pos < politicalTopicList.size(); pos++)
+		for (int pos = 0; pos < politicalTopicList.size(); pos++)
 		{
-			if(currentInput.equals (politicalTopicList.get(pos)))
+			if (currentInput.equals(politicalTopicList.get(pos)))
 			{
 				return true;
 			}
@@ -162,16 +160,16 @@ public class Chatbot
 	 */
 	public boolean memeChecker(String currentInput)
 	{
-		for(int pos = 0; pos < memesList.size(); pos++)
+		for (int pos = 0; pos < memesList.size(); pos++)
 		{
-			if(currentInput.equalsIgnoreCase (memesList.get(pos)))
+			if (currentInput.equalsIgnoreCase(memesList.get(pos)))
 			{
 				return true;
 			}
-			
+
 		}
 		return false;
-		
+
 	}
 
 	/**
@@ -213,7 +211,7 @@ public class Chatbot
 	{
 		return politicalTopicList;
 	}
-	
+
 	/**
 	 * Updates the content area for this Chatbot instance.
 	 * 
@@ -223,13 +221,18 @@ public class Chatbot
 	public void setContent(String content)
 	{
 		this.content = content;
-		
+
 	}
 
 	public boolean twitterChecker(String string)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean isTweet = false;
+
+		if (string.startsWith("#") || string.startsWith("@"))
+		{
+			isTweet = true;
+		}
+		return isTweet;
 	}
 
 	public boolean quitChecker(String string)
@@ -243,9 +246,9 @@ public class Chatbot
 
 	public boolean keyboardMashChecker(String string)
 	{
-		for(int pos = 0; pos < mashList.size(); pos++)
+		for (int pos = 0; pos < mashList.size(); pos++)
 		{
-			if(string.contains(mashList.get(pos)))
+			if (string.contains(mashList.get(pos)))
 			{
 				return true;
 			}
@@ -253,9 +256,39 @@ public class Chatbot
 		return false;
 	}
 
-	public boolean inputHTMLChecker(String string)
+	public boolean inputHTMLChecker(String input)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean isHTML = false;
+
+		if (input.startsWith("<") && input.endsWith(">"))
+		{
+			if (input.length() == 3 && input.contains("p"))
+			{
+				isHTML = true;
+			}
+			
+			if (input.length() >= 2)
+			{
+
+				if (input.contains("</") && input.substring(1, 2).equalsIgnoreCase(input.substring(input.length() - 2,input.length() - 1)))
+				{
+					if (input.contains("HREF"))
+					{
+						if (input.contains("="))
+						{
+							isHTML = true;
+						}
+					}
+					
+					else
+					{
+						isHTML = true;
+					}
+				}
+			}		
+		}
+
+		return isHTML;
 	}
+
 }
