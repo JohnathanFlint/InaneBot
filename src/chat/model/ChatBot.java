@@ -262,7 +262,7 @@ public class Chatbot
 
 		if (input.startsWith("<") && input.endsWith(">"))
 		{
-			if (input.length() == 3 && input.contains("p"))
+			if (input.length() == 3 && input.contains("P"))
 			{
 				isHTML = true;
 			}
