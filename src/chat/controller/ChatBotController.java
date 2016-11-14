@@ -12,6 +12,7 @@ public class ChatbotController
 	{
 		inaneBot = new Chatbot("Aragorn");
 		display = new ChatViewer();
+		baseFrame = new ChatFrame
 	}
 	
 	public void start()
@@ -45,9 +46,25 @@ public class ChatbotController
 		{
 			System.exit(0);
 		}
+		if(inaneBot.politicalTopicChecker(input))
+		{
+			checkedInput = "\nPolotics are not allowed here!";
+		}
+		if(inaneBot.twitterChecker(input))
+		{
+			checkedInput = "\n actually don't use twitter.";
+		}
+		if(inaneBot.keyboardMashChecker(input))
+		{
+			checkedInput = "\nNO MASHING!!! :-(";
+		}
+		if(inaneBot.inputHTMLChecker(input))
+		{
+			checkedInput = "\nDo you know html too?";
+		}
 		if(checkedInput.length() == 0)
 		{
-			checkedInput = "I have no idea waht you mean bout " + input;
+			checkedInput = "Why did you say NOTHING! " + input;
 		}
 		return checkedInput;
 	}

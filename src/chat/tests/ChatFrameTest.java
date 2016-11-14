@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import chat.view.*;
 import chat.controller.*;
 
@@ -15,7 +16,7 @@ public class ChatFrameTest
 	@Before
 	public void setUp() throws Exception
 	{
-		baseFrame = new ChatFrame(new ChatController());
+		baseFrame = new ChatFrame(new ChatbotController());
 	}
 
 	@After
