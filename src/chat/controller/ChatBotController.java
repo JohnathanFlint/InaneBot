@@ -7,27 +7,17 @@ import chat.view.ChatFrame;
 public class ChatbotController
 {
 	private Chatbot inaneBot;
-	private ChatViewer display;
 	private ChatFrame baseFrame;
 	
 	public ChatbotController()
 	{
 		inaneBot = new Chatbot("Aragorn");
-		display = new ChatViewer();
 		baseFrame = new ChatFrame(this);
 		
 	}
 	
 	public void start()
 	{
-		String pResponse = display.collectPictureResponse("What do you want to talk about!?!", null);
-		String response = display.collectResponse("What do you want to talk about!?!");
-		
-		while(inaneBot.lengthChecker(response))
-		{
-			display.displayMessage(useChatbotCheckers(response));
-			response = display.collectResponse("Oh, you want to talk about " + response + "? Tell me more...");
-		}
 		
 		
 	}
@@ -38,12 +28,12 @@ public class ChatbotController
 		
 		if(inaneBot.memeChecker(input))
 		{
-			checkedInput += "\nYou like memes!\n";
+			checkedInput = "\nYou like memes!\n";
 		}
 		
 		if(inaneBot.contentChecker(input))
 		{
-			checkedInput += "\nYou know my secret topic!\n";
+			checkedInput = "\nYou know my secret topic!\n";
 		}
 		if(inaneBot.quitChecker(input))
 		{
@@ -55,7 +45,7 @@ public class ChatbotController
 		}
 		if(inaneBot.twitterChecker(input))
 		{
-			checkedInput = "\n actually don't use twitter.";
+			checkedInput = "\nI actually don't use twitter.";
 		}
 		if(inaneBot.keyboardMashChecker(input))
 		{
@@ -69,7 +59,14 @@ public class ChatbotController
 		{
 			checkedInput = "Why did you say NOTHING! " + input;
 		}
+			
+		if(inaneBot.greetingsChecker(input))
+		{
+			checkedInput = "\nMay the stars shine upon the hour of our meeting.";
+		}
+		
 		return checkedInput;
+	
 	}
 	
 	public ChatFrame getBaseFrame()

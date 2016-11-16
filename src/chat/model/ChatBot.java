@@ -16,6 +16,7 @@ public class Chatbot
 	private String userName;
 	private String content;
 	private ArrayList<String> mashList;
+	private ArrayList<String> greetingsList;
 
 	/**
 	 * Creates an instance of the Chatbot with the supplied username.
@@ -28,12 +29,28 @@ public class Chatbot
 		memesList = new ArrayList<String>();
 		politicalTopicList = new ArrayList<String>();
 		mashList = new ArrayList<String>();
+		greetingsList = new ArrayList<String>();
 
 		content = ("Content");
 		this.userName = userName;
 		buildMemesList();
 		buildPoliticalTopicsList();
 		buildMashList();
+		buildGreetingsList();
+		
+	}
+	
+	private void buildGreetingsList()
+	{
+		greetingsList.add("Hello");
+		greetingsList.add("Hi");
+		greetingsList.add("Hey");
+		greetingsList.add("Greeetings");
+		greetingsList.add("Salutations");
+		greetingsList.add("What's Up?");
+		greetingsList.add("Yo");
+		greetingsList.add("Sup");
+		greetingsList.add("Jazz Hands");
 	}
 
 	private void buildMemesList()
@@ -143,6 +160,19 @@ public class Chatbot
 		for (int pos = 0; pos < politicalTopicList.size(); pos++)
 		{
 			if (currentInput.equals(politicalTopicList.get(pos)))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean greetingsChecker(String currentInput)
+	{
+		for 
+		(int pos = 0; pos < greetingsList.size(); pos++) 
+		{
+			if (currentInput.equalsIgnoreCase(greetingsList.get(pos)))
 			{
 				return true;
 			}
