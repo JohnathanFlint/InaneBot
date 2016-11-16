@@ -2,17 +2,20 @@ package chat.controller;
 
 import chat.model.Chatbot;
 import chat.view.ChatViewer;
+import chat.view.ChatFrame;
 
 public class ChatbotController
 {
 	private Chatbot inaneBot;
 	private ChatViewer display;
+	private ChatFrame baseFrame;
 	
 	public ChatbotController()
 	{
 		inaneBot = new Chatbot("Aragorn");
 		display = new ChatViewer();
-		baseFrame = new ChatFrame
+		baseFrame = new ChatFrame(this);
+		
 	}
 	
 	public void start()
@@ -29,7 +32,7 @@ public class ChatbotController
 		
 	}
 	
-	private String useChatbotCheckers(String input)
+	public String useChatbotCheckers(String input)
 	{
 		String checkedInput = "I have no idea what you mean about..." + input;
 		
@@ -67,5 +70,15 @@ public class ChatbotController
 			checkedInput = "Why did you say NOTHING! " + input;
 		}
 		return checkedInput;
+	}
+	
+	public ChatFrame getBaseFrame()
+	{
+		return baseFrame;
+	}
+	
+	public Chatbot getChatbot()
+	{
+		return inaneBot;
 	}
 }

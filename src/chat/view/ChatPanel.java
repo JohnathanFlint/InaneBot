@@ -5,7 +5,6 @@ import javax.swing.JPanel;
 import chat.controller.ChatbotController;
 import java.awt.Color;
 
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -16,6 +15,7 @@ public class ChatPanel extends JPanel
 	private JTextArea chatDisplay;
 	private JTextField chatField;
 	private JButton chatButton;
+	private JLabel pictureLabel;
 	
 	
 	public ChatPanel(ChatbotController baseController)
@@ -27,6 +27,7 @@ public class ChatPanel extends JPanel
 		chatDisplay = new JTextArea(5, 25);
 		chatField = new JTextField(25);
 		chatButton = new JButton("Chat with bot");
+		pictureLabel = new JLabel(new ImageIcon(getClass().getResource("images/chatbot.png")));
 		
 		
 		setupChatDisplay();		
@@ -51,6 +52,7 @@ public class ChatPanel extends JPanel
 		this.add(chatButton);
 		this.add(chatDisplay);
 		this.add(chatField);
+		this.add(pictureLabel);
 		
 	}
 	
@@ -67,6 +69,16 @@ public class ChatPanel extends JPanel
 	
 	private void setupListeners()
 	{
-		
+		chatButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String personWords = chatField.getText();
+				String chatbotResponse = baseController.useChatbotCheckers(personWords);
+				
+				chatDisplay.setText("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
+				
+			}
+		});
 	}
 }
