@@ -59,10 +59,10 @@ public class ChatbotController
 		{
 			checkedInput = "Why did you say NOTHING! " + input;
 		}
-			
-		if(inaneBot.greetingsChecker(input))
+		int canBeRandom = (int) (Math.random() * 7);
+		if(canBeRandom % 7 == 0)
 		{
-			checkedInput = "\nMay the stars shine upon the hour of our meeting.";
+			checkedInput += randomTopicGenerator();
 		}
 		
 		return checkedInput;
@@ -77,5 +77,52 @@ public class ChatbotController
 	public Chatbot getChatbot()
 	{
 		return inaneBot;
+	}
+	
+	private String randomTopicGenerator()
+	{
+		String randomTopic = "";
+		int random = (int) (Math.random() * 7);
+	
+		switch(random)
+		{
+		case 0:
+			randomTopic = "\nReading is fantastic";
+			break;
+			
+		case 1:
+			randomTopic = "\nI LOVE Java";
+			break;
+			
+		case 2:
+			randomTopic = "\nWhat does bubblegum tast like?";
+			break;
+			
+		case 3:
+			randomTopic = "\nEverything pizza is the best pizza!";
+			break;
+			
+		case 4:
+			randomTopic = "\nDo you want to help me take over the world?";
+			break;
+			
+		case 5:
+			randomTopic = "\nOne of my favorite games is League of Legends.";
+			break;
+			
+		case 6:
+			randomTopic = "\nIf I'm a sentient robot does that mean I have a soul?";
+			break;
+			
+			case 7:
+				randomTopic = "\nMuhahaha!";
+				break;
+			
+		default:
+			randomTopic = "\nThis is impossible!";
+			break;
+		}
+		return randomTopic;
+	
 	}
 }
