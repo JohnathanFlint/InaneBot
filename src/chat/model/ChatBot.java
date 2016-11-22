@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Base version of the 2015 Chatbot class. Only stub methods are provided.
  * Students will complete methods as part of the project.
  * 
- * @author Cody Henrichsen
+ * @author Nicholas White
  * @version 1.0 10/14/15
  */
 public class Chatbot
@@ -51,6 +51,7 @@ public class Chatbot
 		greetingsList.add("Yo");
 		greetingsList.add("Sup");
 		greetingsList.add("Jazz Hands");
+		greetingsList.add("Greetings");
 	}
 
 	private void buildMemesList()
@@ -240,6 +241,11 @@ public class Chatbot
 	public ArrayList<String> getPoliticalTopicList()
 	{
 		return politicalTopicList;
+	}
+	
+	public ArrayList<String> getGreetingList()
+	{
+		return greetingsList;
 	}
 
 	/**

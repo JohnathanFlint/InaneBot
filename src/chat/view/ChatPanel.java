@@ -16,6 +16,7 @@ public class ChatPanel extends JPanel
 	private JTextField chatField;
 	private JButton chatButton;
 	private JLabel pictureLabel;
+	//private JScrollPane scroll;
 	
 	
 	public ChatPanel(ChatbotController baseController)
@@ -28,6 +29,7 @@ public class ChatPanel extends JPanel
 		chatField = new JTextField(25);
 		chatButton = new JButton("Chat with bot");
 		pictureLabel = new JLabel(new ImageIcon(getClass().getResource("images/chatbot.png")));
+		
 		
 		
 		setupChatDisplay();		
@@ -43,6 +45,9 @@ public class ChatPanel extends JPanel
 		chatDisplay.setWrapStyleWord(true);
 		chatDisplay.setLineWrap(true);
 		
+		//JScrollPane scroll = new JScrollPane (chatDisplay);
+		//scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		//scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 	}
 	
 	private void setupPanel()
@@ -53,7 +58,7 @@ public class ChatPanel extends JPanel
 		this.add(chatDisplay);
 		this.add(chatField);
 		this.add(pictureLabel);
-		
+		//this.add(scroll);
 	}
 	
 	private void setupLayout()
@@ -78,6 +83,17 @@ public class ChatPanel extends JPanel
 				
 				chatDisplay.setText("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
 				
+			}
+		});
+		
+		chatField.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent enter)
+			{
+				String personWords = chatField.getText();
+				String chatbotResponse = baseController.useChatbotCheckers(personWords);
+				
+				chatDisplay.setText("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
 			}
 		});
 	}

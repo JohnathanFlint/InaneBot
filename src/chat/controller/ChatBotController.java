@@ -8,64 +8,73 @@ public class ChatbotController
 {
 	private Chatbot inaneBot;
 	private ChatFrame baseFrame;
+	private ChatViewer display;
 	
 	public ChatbotController()
 	{
 		inaneBot = new Chatbot("Aragorn");
 		baseFrame = new ChatFrame(this);
-		
+		display = new ChatViewer();
 	}
 	
 	public void start()
 	{
-		
-		
+				
 	}
 	
 	public String useChatbotCheckers(String input)
 	{
 		String checkedInput = "I have no idea what you mean about..." + input;
-		
-		if(inaneBot.memeChecker(input))
+		if(!inaneBot.quitChecker(input))
 		{
-			checkedInput = "\nYou like memes!\n";
+			
+			if(inaneBot.memeChecker(input))
+			{
+				checkedInput = "\nYou like memes!\n";
+			}
+			
+			if(inaneBot.contentChecker(input))
+			{
+				checkedInput = "\nYou know my secret topic!\n";
+			}
+			if(inaneBot.politicalTopicChecker(input))
+			{
+				checkedInput = "\nPolotics are not allowed here!";
+			}
+			if(inaneBot.twitterChecker(input))
+			{
+				checkedInput = "\nI actually don't use twitter.";
+			}
+			if(inaneBot.keyboardMashChecker(input))
+			{
+				checkedInput = "\nNO MASHING!!! :-(";
+			}
+			if(inaneBot.inputHTMLChecker(input))
+			{
+				checkedInput = "\nDo you know html too?";
+			}
+			if(inaneBot.greetingsChecker(input))
+			{
+				checkedInput = "\nMay the stars shine upon the hour of our meeting.";
+			}
+			if(checkedInput.length() == 0)
+			{
+				checkedInput = "Why did you say NOTHING! " + input;
+			}
+			int canBeRandom = (int) (Math.random() * 7);
+			if(canBeRandom % 7 == 0)
+			{
+				checkedInput += randomTopicGenerator();
+			}
 		}
 		
-		if(inaneBot.contentChecker(input))
+		else
 		{
-			checkedInput = "\nYou know my secret topic!\n";
-		}
-		if(inaneBot.quitChecker(input))
-		{
+			display.displayMessage("Thanks for chatting! Talk to you later.");
 			System.exit(0);
 		}
-		if(inaneBot.politicalTopicChecker(input))
-		{
-			checkedInput = "\nPolotics are not allowed here!";
-		}
-		if(inaneBot.twitterChecker(input))
-		{
-			checkedInput = "\nI actually don't use twitter.";
-		}
-		if(inaneBot.keyboardMashChecker(input))
-		{
-			checkedInput = "\nNO MASHING!!! :-(";
-		}
-		if(inaneBot.inputHTMLChecker(input))
-		{
-			checkedInput = "\nDo you know html too?";
-		}
-		if(checkedInput.length() == 0)
-		{
-			checkedInput = "Why did you say NOTHING! " + input;
-		}
-		int canBeRandom = (int) (Math.random() * 7);
-		if(canBeRandom % 7 == 0)
-		{
-			checkedInput += randomTopicGenerator();
-		}
-		
-		return checkedInput;
+			
+			return checkedInput;
 	
 	}
 	
