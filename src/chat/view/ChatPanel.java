@@ -16,7 +16,8 @@ public class ChatPanel extends JPanel
 	private JTextField chatField;
 	private JButton chatButton;
 	private JLabel pictureLabel;
-	//private JScrollPane scroll;
+	private JScrollPane scroll;
+	private String conversation;
 	
 	
 	public ChatPanel(ChatbotController baseController)
@@ -29,8 +30,8 @@ public class ChatPanel extends JPanel
 		chatField = new JTextField(25);
 		chatButton = new JButton("Chat with bot");
 		pictureLabel = new JLabel(new ImageIcon(getClass().getResource("images/chatbot.png")));
-		
-		
+		scroll = new JScrollPane (chatDisplay);		
+		conversation = "";
 		
 		setupChatDisplay();		
 		setupPanel();
@@ -43,11 +44,7 @@ public class ChatPanel extends JPanel
 		chatDisplay.setEditable(false);
 		chatDisplay.setEnabled(false);
 		chatDisplay.setWrapStyleWord(true);
-		chatDisplay.setLineWrap(true);
-		
-		//JScrollPane scroll = new JScrollPane (chatDisplay);
-		//scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		//scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		chatDisplay.setLineWrap(true);				
 	}
 	
 	private void setupPanel()
@@ -55,20 +52,20 @@ public class ChatPanel extends JPanel
 		this.setLayout(baseLayout);
 		this.setBackground(Color.GREEN);
 		this.add(chatButton);
-		this.add(chatDisplay);
 		this.add(chatField);
+		this.add(scroll);
 		this.add(pictureLabel);
-		//this.add(scroll);
+		
 	}
 	
 	private void setupLayout()
 	{
 		baseLayout.putConstraint(SpringLayout.WEST, chatButton, 79, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.WEST, chatDisplay, 0, SpringLayout.WEST, chatButton);
+		baseLayout.putConstraint(SpringLayout.WEST, scroll, 0, SpringLayout.WEST, chatButton);
 		baseLayout.putConstraint(SpringLayout.NORTH, chatButton, 261, SpringLayout.NORTH, this);
 		baseLayout.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, chatField, -6, SpringLayout.NORTH, chatButton);
-		baseLayout.putConstraint(SpringLayout.SOUTH, chatDisplay, -6, SpringLayout.NORTH, chatField);
+		baseLayout.putConstraint(SpringLayout.SOUTH, scroll, -6, SpringLayout.NORTH, chatField);
 
 	}
 	
@@ -81,8 +78,9 @@ public class ChatPanel extends JPanel
 				String personWords = chatField.getText();
 				String chatbotResponse = baseController.useChatbotCheckers(personWords);
 				
-				chatDisplay.setText("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
-				
+				conversation += ("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
+				chatDisplay.setText(conversation);
+				//chatDisplay.setDisabledTextColor(new Color(1,1,1));
 			}
 		});
 		
@@ -93,7 +91,10 @@ public class ChatPanel extends JPanel
 				String personWords = chatField.getText();
 				String chatbotResponse = baseController.useChatbotCheckers(personWords);
 				
-				chatDisplay.setText("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
+				conversation += ("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
+				chatDisplay.setText(conversation);
+				
+				chatField.setText("");
 			}
 		});
 	}

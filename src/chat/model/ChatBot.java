@@ -17,6 +17,7 @@ public class Chatbot
 	private String content;
 	private ArrayList<String> mashList;
 	private ArrayList<String> greetingsList;
+	private ArrayList<String> colorList;
 
 	/**
 	 * Creates an instance of the Chatbot with the supplied username.
@@ -30,6 +31,7 @@ public class Chatbot
 		politicalTopicList = new ArrayList<String>();
 		mashList = new ArrayList<String>();
 		greetingsList = new ArrayList<String>();
+		colorList = new ArrayList<String>();
 
 		content = ("Content");
 		this.userName = userName;
@@ -111,7 +113,6 @@ public class Chatbot
 	/**
 	 * Checks the length of the supplied string. Returns false if the supplied
 	 * String is empty or null, otherwise returns true.
-	 * 
 	 * @param currentInput
 	 * @return A true or false based on the length of the supplied String.
 	 */
