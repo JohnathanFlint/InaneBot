@@ -18,6 +18,10 @@ public class ChatPanel extends JPanel
 	private JLabel pictureLabel;
 	private JScrollPane scroll;
 	private String conversation;
+	private JButton openFile;
+	private JButton saveText;
+	private JButton postTwit;
+	private JButton searchTwit;
 	
 	
 	public ChatPanel(ChatbotController baseController)
