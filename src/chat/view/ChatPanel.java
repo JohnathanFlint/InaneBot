@@ -32,10 +32,21 @@ public class ChatPanel extends JPanel
 		baseLayout = new SpringLayout();
 		chatDisplay = new JTextArea(5, 25);
 		chatField = new JTextField(25);
+		baseLayout.putConstraint(SpringLayout.WEST, chatField, 79, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, chatField, -45, SpringLayout.SOUTH, this);
 		chatButton = new JButton("Chat with bot");
 		pictureLabel = new JLabel(new ImageIcon(getClass().getResource("images/chatbot.png")));
 		scroll = new JScrollPane (chatDisplay);		
+		baseLayout.putConstraint(SpringLayout.WEST, scroll, 79, SpringLayout.WEST, this);
 		conversation = "";
+		openFile = new JButton("openFile");
+		saveText = new JButton("saveText");
+		baseLayout.putConstraint(SpringLayout.EAST, saveText, -250, SpringLayout.EAST, this);
+		postTwit = new JButton("postTwit");
+		baseLayout.putConstraint(SpringLayout.WEST, postTwit, 0, SpringLayout.WEST, chatField);
+		baseLayout.putConstraint(SpringLayout.SOUTH, postTwit, 0, SpringLayout.SOUTH, this);
+		baseLayout.putConstraint(SpringLayout.EAST, postTwit, 0, SpringLayout.EAST, chatButton);
+		searchTwit = new JButton("searchTwit");		
 		
 		setupChatDisplay();		
 		setupPanel();
@@ -58,17 +69,19 @@ public class ChatPanel extends JPanel
 		this.add(chatButton);
 		this.add(chatField);
 		this.add(scroll);
+		this.add(openFile);
+		this.add(saveText);
+		this.add(postTwit);
+		this.add(searchTwit);
 		this.add(pictureLabel);
+
 		
 	}
 	
 	private void setupLayout()
 	{
 		baseLayout.putConstraint(SpringLayout.WEST, chatButton, 79, SpringLayout.WEST, this);
-		baseLayout.putConstraint(SpringLayout.WEST, scroll, 0, SpringLayout.WEST, chatButton);
 		baseLayout.putConstraint(SpringLayout.NORTH, chatButton, 261, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.WEST, chatField, 0, SpringLayout.WEST, chatButton);
-		baseLayout.putConstraint(SpringLayout.SOUTH, chatField, -6, SpringLayout.NORTH, chatButton);
 		baseLayout.putConstraint(SpringLayout.SOUTH, scroll, -6, SpringLayout.NORTH, chatField);
 
 	}

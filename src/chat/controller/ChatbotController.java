@@ -134,4 +134,10 @@ public class ChatbotController
 		return randomTopic;
 	
 	}
+	
+	public void handleErrors(Exception currentException)
+	{
+		display.displayMessage("An error has occurred. Coming soon to a popup near you Details");
+		display.displayMessage(currentException.getMessage());
+	}
 }
