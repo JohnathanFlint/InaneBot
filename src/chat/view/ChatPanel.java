@@ -39,14 +39,14 @@ public class ChatPanel extends JPanel
 		scroll = new JScrollPane (chatDisplay);		
 		baseLayout.putConstraint(SpringLayout.WEST, scroll, 79, SpringLayout.WEST, this);
 		conversation = "";
-		openFile = new JButton("openFile");
-		saveText = new JButton("saveText");
+		openFile = new JButton("Open File");
+		saveText = new JButton("Save Text");
 		baseLayout.putConstraint(SpringLayout.EAST, saveText, -250, SpringLayout.EAST, this);
-		postTwit = new JButton("postTwit");
+		postTwit = new JButton("Post Tweet");
 		baseLayout.putConstraint(SpringLayout.WEST, postTwit, 0, SpringLayout.WEST, chatField);
 		baseLayout.putConstraint(SpringLayout.SOUTH, postTwit, 0, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.EAST, postTwit, 0, SpringLayout.EAST, chatButton);
-		searchTwit = new JButton("searchTwit");		
+		baseLayout.putConstraint(SpringLayout.EAST, postTwit, 100, SpringLayout.EAST, chatButton);
+		searchTwit = new JButton("Search Twitter");		
 		
 		setupChatDisplay();		
 		setupPanel();
@@ -59,7 +59,10 @@ public class ChatPanel extends JPanel
 		chatDisplay.setEditable(false);
 		chatDisplay.setEnabled(false);
 		chatDisplay.setWrapStyleWord(true);
-		chatDisplay.setLineWrap(true);				
+		chatDisplay.setLineWrap(true);	
+		scroll.setViewportView(chatDisplay);
+		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	}
 	
 	private void setupPanel()
@@ -107,9 +110,10 @@ public class ChatPanel extends JPanel
 			{
 				String personWords = chatField.getText();
 				String chatbotResponse = baseController.useChatbotCheckers(personWords);
+				String currentText = chatDisplay.getText();
 				
-				conversation += ("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse);
-				chatDisplay.setText(conversation);
+				conversation += ("You said: " + personWords +"\n"+ "Chatbot says: " + chatbotResponse + "\n" + currentText);
+				chatDisplay.setCaretPosition(0);
 				
 				chatField.setText("");
 			}
