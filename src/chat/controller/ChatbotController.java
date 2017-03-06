@@ -1,5 +1,6 @@
 package chat.controller;
 
+import chat.model.CTECTwitter;
 import chat.model.Chatbot;
 import chat.view.ChatViewer;
 import chat.view.ChatFrame;
@@ -9,10 +10,13 @@ public class ChatbotController
 	private Chatbot inaneBot;
 	private ChatFrame baseFrame;
 	private ChatViewer display;
+	private CTECTwitter twitterBot;
 	
 	public ChatbotController()
 	{
 		inaneBot = new Chatbot("Aragorn");
+		twitterBot = new CTECTwitter(this);
+		//GUI after model.
 		baseFrame = new ChatFrame(this);
 		display = new ChatViewer();
 	}
@@ -139,5 +143,10 @@ public class ChatbotController
 	{
 		display.displayMessage("An error has occurred. Coming soon to a popup near you Details");
 		display.displayMessage(currentException.getMessage());
+	}
+	
+	public void useTwitter(String text)
+	{
+		twitterBot.sendTweet(text);
 	}
 }

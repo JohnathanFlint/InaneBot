@@ -3,6 +3,8 @@ package chat.view;
 import javax.swing.*;
 import javax.swing.JPanel;
 import chat.controller.ChatbotController;
+import chat.controller.FileController;
+
 import java.awt.Color;
 
 import java.awt.event.ActionListener;
@@ -43,6 +45,8 @@ public class ChatPanel extends JPanel
 		saveText = new JButton("Save Text");
 		baseLayout.putConstraint(SpringLayout.EAST, saveText, -250, SpringLayout.EAST, this);
 		postTwit = new JButton("Post Tweet");
+		baseLayout.putConstraint(SpringLayout.NORTH, postTwit, 50, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.WEST, postTwit, 0, SpringLayout.WEST, this);
 		
 		searchTwit = new JButton("Search Twitter");		
 		
@@ -102,6 +106,27 @@ public class ChatPanel extends JPanel
 			}
 		});
 		
+		saveText.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent click)
+			{
+				String fileName = chatField.getText();
+				
+				FileController.saveFile(baseController, fileName, chatDisplay.getText());
+			}
+				});
+		
+		openFile.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent click)
+					{
+						String fileName = chatField.getText();
+						String saved = FileController.readFile(baseController,  fileName + ".txt");
+						chatDisplay.setText(saved);
+						
+					}
+				});
+		
 		chatField.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent enter)
@@ -115,6 +140,14 @@ public class ChatPanel extends JPanel
 				
 				chatField.setText("");
 			}
+		});
+		
+		postTwit.addActionListener(new ActionListener()
+		{
+				public void actionPerformed(ActionEvent click)
+				{
+					baseController.useTwitter(chatField.getText());
+				}
 		});
 	}
 }
