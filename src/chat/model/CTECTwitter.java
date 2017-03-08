@@ -137,6 +137,7 @@ public class CTECTwitter
 	}
 	
 	private void statusesToWords()
+
 	{
 		for(Status currentStatus : searchedTweets)
 		{
@@ -148,5 +149,36 @@ public class CTECTwitter
 				tweetedWords.add(tweetWords[index]);
 			}
 		}
+	}
+	
+	private String calculatePopularWordAndCount()
+	{
+		String information = "";
+		String mostPopular = "";
+		int popularIndex = 0;
+		int popularCount = 0;
+		
+		for(int index = 0; index < tweetedWords.size(); index++)
+		{
+			int currentPopularity = 0;
+			for(int searched = index + 1; searched < tweetedWords.size(); searched++)
+			{
+				if(tweetedWords.get(index).equalsIgnoreCase(mostPopular))
+				{
+					currentPopularity++;
+				}
+			}
+			
+			if(currentPopularity > popularCount)
+			{
+				popularIndex = index;
+				popularCount = currentPopularity;
+				mostPopular = tweetedWords.get(index);
+			}
+		}
+		
+		information = "The most popular word is: " + mostPopular + ", and it occured " + popularCount + "times out of " + tweetedWords.size() + ", AKA " + ((double) popularCount)/tweetedWords.size() + "%"; 
+		
+		return information;
 	}
 }
