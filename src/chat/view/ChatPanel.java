@@ -49,6 +49,7 @@ public class ChatPanel extends JPanel
 		baseLayout.putConstraint(SpringLayout.WEST, postTwit, 0, SpringLayout.WEST, this);
 		
 		searchTwit = new JButton("Search Twitter");		
+		baseLayout.putConstraint(SpringLayout.EAST, searchTwit, 5, SpringLayout.EAST, this);
 		
 		setupChatDisplay();		
 		setupPanel();
