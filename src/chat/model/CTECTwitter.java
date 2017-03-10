@@ -7,8 +7,14 @@ import java.util.Scanner;
 
 import chat.controller.ChatbotController;
 import twitter4j.Twitter;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import twitter4j.GeoLocation;
 import twitter4j.Paging;
+import twitter4j.Query;
+import twitter4j.QueryResult;
 import twitter4j.Status;
 
 public class CTECTwitter
@@ -146,7 +152,7 @@ public class CTECTwitter
 			
 			for(int index =0; index < tweetWords.length; index++)
 			{
-				tweetedWords.add(tweetWords[index]);
+				tweetedWords.add(removePunctuation(tweetWords[index]));
 			}
 		}
 	}
@@ -163,7 +169,7 @@ public class CTECTwitter
 			int currentPopularity = 0;
 			for(int searched = index + 1; searched < tweetedWords.size(); searched++)
 			{
-				if(tweetedWords.get(index).equalsIgnoreCase(mostPopular))
+				if(tweetedWords.get(index).equalsIgnoreCase(tweetedWords.get(searched)) && !tweetedWords.get(index).equals(mostPopular))
 				{
 					currentPopularity++;
 				}
@@ -177,8 +183,94 @@ public class CTECTwitter
 			}
 		}
 		
-		information = "The most popular word is: " + mostPopular + ", and it occured " + popularCount + "times out of " + tweetedWords.size() + ", AKA " + ((double) popularCount)/tweetedWords.size() + "%"; 
+		information = "The most popular word is: " + mostPopular + ", and it occured " + popularCount + "times out of " 
+				+ tweetedWords.size() + ", AKA " + (DecimalFormat.getPercentInstance().format(((double) popularCount)/tweetedWords.size())); 
 		
 		return information;
+	}
+	
+	private String removePunctuation(String currentString)
+	{
+		String punctuation = ".,'?!:;\"(){}^[]<>-";
+		
+		String scrubbedString = "";
+		for(int i = 0; i< currentString.length(); i++)
+		{
+			if(punctuation.indexOf(currentString.charAt(i)) == -1)
+			{
+				scrubbedString += currentString.charAt(i);
+			}
+		}
+		
+		return scrubbedString;
+	}
+	
+	public int euroQuery(String searchName)
+	{
+		int euroResults = 0;
+		
+		Query euroQuery = new Query("Brandon Sanderson");
+		//find out what count is for
+		euroQuery.setCount(100);
+		//set this geoCode for europe
+		euroQuery.setGeoCode(new GeoLocation(0, 0), 0, Query.KILOMETERS);
+		//find publish date of first sanderson book to now.
+		euroQuery.setSince("0");
+		
+		try
+		{
+			QueryResult result = chatbotTwitter.search(euroQuery);
+			euroResults += result.getCount();
+			
+		}
+		catch(TwitterException error)
+		{
+			error.printStackTrace();
+		}
+		
+		return euroResults;
+	}
+	
+	public int USQuery(String searchName)
+	{
+		int USResults = 0;
+		
+		Query USQuery = new Query(searchName);
+		USQuery.setCount(100);
+		USQuery.setGeoCode(new GeoLocation(0, 0), 0, Query.KILOMETERS);
+		USQuery.setSince("0");
+		
+		try
+		{
+			QueryResult result = chatbotTwitter.search(USQuery);
+			USResults = result.getCount();
+		}
+		catch(TwitterException error)
+		{
+			error.printStackTrace();
+		}
+		
+		return USResults;
+	}
+	
+	public String investigateSanderson()
+	{
+		String results = "";
+		int UsTotal = 0;
+		int euroTotal = 0;
+		
+		int euroAuthor = euroQuery("Brandon Sanderson");
+		int euroCosmere = euroQuery("Cosmere");
+		int euroArchive = euroQuery("Stormlight Archive");
+		int euro
+		
+		int  USAuthor = USQuery("Brandon Sanderson");
+		int USArchive = USQuery("Stormlight Archive");
+		
+		
+		
+		results += "The United States results are: " + (author + series) + "The European results are: "  + euroQuery();
+		
+		if(euroQuery() > USQuery())
 	}
 }
