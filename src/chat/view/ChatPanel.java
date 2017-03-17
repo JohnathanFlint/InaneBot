@@ -155,6 +155,7 @@ public class ChatPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
+				
 				String results = baseController.searchTwitterUser(chatField.getText());
 				chatDisplay.setText(results + chatDisplay.getText());
 			}
