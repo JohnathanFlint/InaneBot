@@ -158,4 +158,13 @@ public class ChatbotController
 		
 		return searchResults;
 	}
+	
+	public String investigateSanderson()
+	{
+		String results = "";
+		
+		results = twitterBot.investigateSanderson();
+		
+		return results;
+	}
 }

@@ -205,6 +205,18 @@ public class CTECTwitter
 		return scrubbedString;
 	}
 	
+	private void removeMntions()
+	{
+		for(int index = 0; index < tweetedWords.size(); index++)
+		{
+			if(tweetedWords.get(index).substring(0,1).equals("@"))
+			{
+				tweetedWords.remove(index);
+				index--;
+			}
+		}
+	}
+	
 	public int euroQuery(String searchName)
 	{
 		int euroResults = 0;
@@ -213,9 +225,9 @@ public class CTECTwitter
 		//find out what count is for
 		euroQuery.setCount(100);
 		//set this geoCode for europe
-		euroQuery.setGeoCode(new GeoLocation(0, 0), 0, Query.KILOMETERS);
+		euroQuery.setGeoCode(new GeoLocation(54.5260, 15.2551), 2300, Query.KILOMETERS);
 		//find publish date of first sanderson book to now.
-		euroQuery.setSince("0");
+		euroQuery.setSince("2005-04-21");
 		
 		try
 		{
@@ -237,8 +249,8 @@ public class CTECTwitter
 		
 		Query USQuery = new Query(searchName);
 		USQuery.setCount(100);
-		USQuery.setGeoCode(new GeoLocation(0, 0), 0, Query.KILOMETERS);
-		USQuery.setSince("0");
+		USQuery.setGeoCode(new GeoLocation(39.8282, 98.5795), 1400, Query.MILES);
+		USQuery.setSince("2005-04-21");
 		
 		try
 		{
@@ -256,21 +268,37 @@ public class CTECTwitter
 	public String investigateSanderson()
 	{
 		String results = "";
+		String outcome = "";
 		int UsTotal = 0;
 		int euroTotal = 0;
 		
 		int euroAuthor = euroQuery("Brandon Sanderson");
 		int euroCosmere = euroQuery("Cosmere");
 		int euroArchive = euroQuery("Stormlight Archive");
-		int euro
+		int euroMisborn = euroQuery("Mistborn");
+		int euroAlcatraz = euroQuery("Alcatraz Versus the Evil Librarians");
 		
-		int  USAuthor = USQuery("Brandon Sanderson");
-		int USArchive = USQuery("Stormlight Archive");
+//		int  USAuthor = USQuery("Brandon Sanderson");
+//		int USArchive = USQuery("Stormlight Archive");
+//		int USCosmere = USQuery("Cosmere");
+//		int USMisborn = USQuery("Mistborn");
+//		int USAlcatraz = USQuery("Alcatraz Versus the Evil Librarians");
 		
+		int USResults = 0; //(USAuthor + USArchive + USCosmere + USMisborn + USAlcatraz);	
+		int euroResults = (euroAuthor + euroCosmere + euroArchive +euroMisborn + euroAlcatraz);
 		
+		results += "The United States results are: " + USResults +  "The European results are: "  + euroResults;
 		
-		results += "The United States results are: " + (author + series) + "The European results are: "  + euroQuery();
+		if(euroResults > USResults)
+		{
+			outcome += results + "Brandon Sanderson is more popular in Europe by: " + (euroResults - USResults);
+		}
+		else if(USResults > euroResults)
+		{
+			outcome += results + "Brandon Sanderson is more popular in the United States by: " + (USResults - euroResults);
+
+		}
 		
-		if(euroQuery() > USQuery())
+		return outcome;
 	}
 }

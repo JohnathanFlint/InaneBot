@@ -159,5 +159,15 @@ public class ChatPanel extends JPanel
 				chatDisplay.setText(results + chatDisplay.getText());
 			}
 		});
+		
+		searchTwit.addActionListener(new ActionListener()
+				{
+					public void actionPerformed(ActionEvent longCLick)
+					{
+						String results = baseController.investigateSanderson();
+						 chatDisplay.setText(results);
+					}
+					
+				});
 	}
 }
