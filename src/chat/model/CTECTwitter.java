@@ -88,7 +88,8 @@ public class CTECTwitter
 			try
 			{
 				searchedTweets.addAll(chatbotTwitter.getUserTimeline(username, statusPage));
-			} catch (TwitterException searchTweetError)
+			} 
+			catch (TwitterException searchTweetError)
 			{
 				baseController.handleErrors(searchTweetError);
 				;
@@ -207,7 +208,7 @@ public class CTECTwitter
 		return scrubbedString;
 	}
 
-	private void removeMntions()
+	private void removeMentions()
 	{
 		for (int index = 0; index < tweetedWords.size(); index++)
 		{
